@@ -1,0 +1,8 @@
+---
+applications:
+  - name: give-ipp-usps
+    buildpacks: 
+      - java_buildpack
+    random-route: true
+    services:
+      - give-ipp-usps-data

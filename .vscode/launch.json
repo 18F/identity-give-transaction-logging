@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<gsa-give-ipp-usps>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "gov.gsa.give.ipp.usps.Application",
+            "projectName": "gsa-give-ipp-usps",
+            "args": ""
+        }
+    ]
+}
