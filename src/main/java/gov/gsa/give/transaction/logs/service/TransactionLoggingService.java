@@ -50,6 +50,9 @@ public class TransactionLoggingService {
 
 
     }
+    public void deleteTransactionLog(TransactionLog transaction){
+        transactionRepo.delete(transaction);
+    }
 
     public Optional<TransactionLog> getTransactionLogByLogid(Long logid){
         return transactionRepo.findById(logid);

@@ -1,19 +1,15 @@
 package gov.gsa.give.transaction.logs.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import gov.gsa.give.transaction.logs.model.TransactionLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 //import net.guides.springboot2.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import gov.gsa.give.transaction.logs.exception.ResourceNotFoundException;
@@ -70,17 +66,15 @@ public class TransactionLoggingController {
 
         return ResponseEntity.ok(updatedTransaction);
     }
-/*
-    @DeleteMapping("/employees/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId)
-            throws ResourceNotFoundException {
-        Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
 
-        employeeRepository.delete(employee);
+    @DeleteMapping("/transaction/{logid}")
+    public Map<String, Boolean> deleteTransaction(@PathVariable(value = "logid") Long logid)
+            throws ResourceNotFoundException {
+        TransactionLog transaction = loggingService.getTransactionLogByLogid(logid).orElseThrow(() -> new ResourceNotFoundException("Log not found for:: " + logid));
+        loggingService.deleteTransactionLog(transaction);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     }
-     */
+
 }

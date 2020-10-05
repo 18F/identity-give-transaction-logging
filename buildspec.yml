@@ -5,8 +5,8 @@ env:
     MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
     MAVEN_CLI_OPTS: '--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true'
   secrets-manager:
-    GIVE_CI_USERNAME: give-ci-sandbox-secrets:GIVE_CI_USERNAME
-    GIVE_CI_PASSWORD: give-ci-sandbox-secrets:GIVE_CI_PASSWORD
+    GIVE_CI_USERNAME: give-ci-dev-secrets:GIVE_CI_USERNAME
+    GIVE_CI_PASSWORD: give-ci-dev-secrets:GIVE_CI_PASSWORD
 phases:
   install:
     runtime-versions:
@@ -33,9 +33,9 @@ phases:
       # Push app to cloud.gov and create a random route to avoid collision, but don't start it yet
       - cf push -m 512M --no-start --random-route
       # Set memory allocation for the JVM to 128M
-      - cf set-env give-ipp-usps JAVA_OPTS '-XX:ReservedCodeCacheSize=128M'
+      - cf set-env gsa-give-transaction-logging JAVA_OPTS '-XX:ReservedCodeCacheSize=128M'
       # Start the application
-      - cf start give-ipp-usps
+      - cf start gsa-give-transaction-logging
 reports:
   # Push test reports to AWS Code
   test-report:
