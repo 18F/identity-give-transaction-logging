@@ -1,8 +1,8 @@
 ---
 applications:
-  - name: give-ipp-usps
+  - name: identity-give-transaction-logging
     buildpacks: 
       - java_buildpack
     random-route: true
     services:
-      - give-ipp-usps-data
+      - identity-give-transaction-logging-data

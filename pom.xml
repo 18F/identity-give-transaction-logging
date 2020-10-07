@@ -10,9 +10,9 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>gov.gsa.give</groupId>
-	<artifactId>gsa-give-ipp-usps</artifactId>
+	<artifactId>identity-give-transaction-logging</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GSA GIVE IPP USPS Service</name>
+	<name>GSA GIVE Transaction Logging</name>
 	<description>GSA GIVE microservice to support in person proofing using USPS APIs</description>
 
 	<properties>
