@@ -4,5 +4,4 @@ applications:
     buildpacks: 
       - java_buildpack
     random-route: true
-    services:
-      - identity-give-transaction-logging-data
+
