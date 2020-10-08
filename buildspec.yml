@@ -34,6 +34,8 @@ phases:
       - cf push -m 512M --no-start --random-route
       # Set memory allocation for the JVM to 128M
       - cf set-env identity-give-transaction-logging JAVA_OPTS '-XX:ReservedCodeCacheSize=128M'
+      # Restage env
+      - cf restage identity-give-transaction-logging
       # Start the application
       - cf start identity-give-transaction-logging
 reports:
