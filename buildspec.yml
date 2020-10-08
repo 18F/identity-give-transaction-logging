@@ -31,7 +31,7 @@ phases:
       # Login to cloud.gov
       - cf login -a https://api.fr.cloud.gov -u $GIVE_CI_USERNAME -p $GIVE_CI_PASSWORD
       # Push app to cloud.gov and create a random route to avoid collision, but don't start it yet
-      - cf push -m 800M --no-start --random-route
+      - cf push -m 512M --no-start --random-route
       # Set memory allocation for the JVM to 128M
       - cf set-env identity-give-transaction-logging JAVA_OPTS '-XX:ReservedCodeCacheSize=128M'
       # Start the application
