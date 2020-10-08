@@ -33,7 +33,7 @@ phases:
       # Push app to cloud.gov and create a random route to avoid collision, but don't start it yet
       - cf push -m 512M --no-start --random-route
       # Set memory allocation for the JVM to 128M
-      - cf set-env identity-give-transaction-logging JAVA_OPTS '-XX:ReservedCodeCacheSize=128M'
+      - cf set-env identity-give-transaction-logging JAVA_OPTS '-XX:ReservedCodeCacheSize=240M'
       # Start the application
       - cf start identity-give-transaction-logging
 reports:
