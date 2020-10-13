@@ -1,7 +1,7 @@
 ---
 applications:
-  - name: identity-give-transaction-logging
+  - name: give-transaction-logging
     buildpacks: 
       - java_buildpack
-    path: target/identity-give-transaction-logging-0.0.1-SNAPSHOT.jar
+    path: target/give-transaction-logging-0.0.1-SNAPSHOT.jar
     random-route: true

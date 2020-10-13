@@ -10,7 +10,7 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>gov.gsa.give</groupId>
-	<artifactId>identity-give-transaction-logging</artifactId>
+	<artifactId>give-transaction-logging</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GSA GIVE Transaction Logging</name>
 	<description>GSA GIVE microservice to support in person proofing using USPS APIs</description>
