@@ -8,9 +8,10 @@ applications:
     services:
       - give-transaction-logging-data
     env:
-      spring.datasource.url: ${vcap.services.mysql.credentials.jdbcUrl:jdbc:h2:mem:testdb}
-      spring.datasource.username: ${vcap.services.mysql.credentials.username:sa}
-      spring.datasource.password: ${vcap.services.mysql.credentials.password:}
-      spring.datasource.testOnBorrow: true
+      datasource:
+        url: ${cloud.services.give-transaction-logging.connection.jdbcurl:jdbc:mysql:give-transaction-logging-data}
+        username: ${cloud.services.give-transaction-logging-data.connection.username:username}
+        password: ${cloud.services.give-transaction-logging-data.connection.password:password}
+        platform: mysql
 
 
