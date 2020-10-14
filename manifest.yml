@@ -7,9 +7,5 @@ applications:
     random-route: true
     services:
       - give-transaction-logging-data
-    env:
-      spring.datasource.url: ${vcap.services.mysql.credentials.jdbcUrl:jdbc:h2:mem:testdb}
-      spring.datasource.username: ${vcap.services.mysql.credentials.username:sa}
-      spring.datasource.password: ${vcap.services.mysql.credentials.password:}
-      spring.datasource.testOnBorrow: true
+
 
