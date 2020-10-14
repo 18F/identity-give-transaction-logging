@@ -7,11 +7,7 @@ applications:
     random-route: true
     services:
       - give-transaction-logging-data
-    env:
-      datasource:
-        url: ${cloud.services.give-transaction-logging.connection.jdbcurl:jdbc:mysql:give-transaction-logging-data}
-        username: ${cloud.services.give-transaction-logging-data.connection.username:username}
-        password: ${cloud.services.give-transaction-logging-data.connection.password:password}
-        platform: mysql
+
+
 
 

@@ -4,6 +4,7 @@ env:
   variables:
     MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
     MAVEN_CLI_OPTS: '--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true'
+
   secrets-manager:
     GIVE_CI_USERNAME: give-ci-dev-secrets:GIVE_CI_USERNAME
     GIVE_CI_PASSWORD: give-ci-dev-secrets:GIVE_CI_PASSWORD
