@@ -5,10 +5,6 @@ applications:
       - java_buildpack
     path: target/give-transaction-logging-0.0.1-SNAPSHOT.jar
     random-route: true
-    mysql:
-      image: mysql
-      ports:
-        - "3306:3306"
-      environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=test
+    services:
+      - give-transaction-logging-data
+
