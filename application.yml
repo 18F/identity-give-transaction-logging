@@ -1,0 +1,12 @@
+spring:
+  profiles: cloud
+  datasource:
+    url: ${cloud.services.consultation-portal-db.connection.jdbcurl:jdbc:mysql:give-transaction-logging-data}
+    username: ${cloud.services.give-transaction-logging-data.connection.username:username}
+    password: ${cloud.services.give-transaction-logging-data.connection.password:password}
+    platform: mysql
+    initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: validate
