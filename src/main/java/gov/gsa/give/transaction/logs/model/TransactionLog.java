@@ -21,6 +21,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="transaction_log")
 public class TransactionLog implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
