@@ -36,20 +36,15 @@ public class TransactionLoggingService {
     public List<TransactionLog> getTransactionLogByRpid(String rpid){
         //List<TransactionLog> transactionsByRpid =  transactionRepo.findByRpid(rpid);
         return transactionRepo.findByRpid(rpid);
-
     }
     public TransactionLog updateTransactionLog(TransactionLog transaction, TransactionLog transactionDetails) {
-
         //return transactionRepo.save(transaction);
         transaction.setRpid(transactionDetails.getRpid());
         transaction.setProofing_status(transactionDetails.getProofing_status());
         transaction.setProofing_result(transactionDetails.getProofing_result());
         transaction.setVendor(transactionDetails.getVendor());
-
         final TransactionLog updatedTransaction = transactionRepo.save(transaction);
         return updatedTransaction;
-
-
     }
     public void deleteTransactionLog(TransactionLog transaction){
         transactionRepo.delete(transaction);
@@ -58,9 +53,5 @@ public class TransactionLoggingService {
     public Optional<TransactionLog> getTransactionLogByLogid(Long logid){
         return transactionRepo.findById(logid);
     }
-
-
-
-
 
 }

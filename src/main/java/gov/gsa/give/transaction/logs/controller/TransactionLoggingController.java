@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//import net.guides.springboot2.springboot2jpacrudexample.exception.ResourceNotFoundException;
+
 import gov.gsa.give.transaction.logs.exception.ResourceNotFoundException;
 import gov.gsa.give.transaction.logs.service.TransactionLoggingService;
 
@@ -56,7 +56,6 @@ public class TransactionLoggingController {
 
 
     //Updates transaction based on logid
-
     @PutMapping("/transaction/{logid}")
     public ResponseEntity<TransactionLog> updateTransaction(@PathVariable(value = "logid") Long logid,
                                                    @Valid @RequestBody TransactionLog transactionDetails) throws ResourceNotFoundException {

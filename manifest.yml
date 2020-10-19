@@ -7,7 +7,3 @@ applications:
     random-route: true
     services:
       - give-transaction-logging-data
-
-
-
-
