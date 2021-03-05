@@ -7,6 +7,7 @@ applications:
     instances: ((instances))
     memory: ((memory))
     services:
+      # DB name convention is <app-name>-db
       - transaction-log-db
     buildpacks:
       - python_buildpack
