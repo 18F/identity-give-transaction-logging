@@ -29,6 +29,9 @@ jobs:
           cf auth ${{ secrets.CF_USERNAME }} ${{ secrets.CF_PASSWORD }}
           cf target -o ${{ secrets.CF_ORG }} -s give-dev
 
+      - name: Ensure DB Available
+        run: .cloud-gov/ensure_db_available.sh transaction-log-db
+
       - name: Deploy Application
         run: |
           cf push --vars-file vars.yaml --var SECRET_KEY=${{ secrets.SECRET_KEY }} --strategy rolling
