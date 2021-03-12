@@ -21,16 +21,27 @@ class TransactionRecord(models.Model):
         choices=ServiceType.choices,
     )
 
-    customer = models.CharField(max_length=60)
+    # The validation provider. e.g. USPS, Idemia
+    provider = models.CharField(max_length=60)
+
+    # The CSP that sent the request. e.g. login.gov
     csp = models.CharField(max_length=60)
-    cost = models.DecimalField(decimal_places=3, max_digits=8)
+
+    # The result of the transaction. Match/No-match
     result = models.CharField(max_length=60)
 
+    # The unique identifier for this record. Services that need to look up
+    # and modify existing records with additional data should store this
+    # value themselves.
     record_uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    cost = models.DecimalField(decimal_places=3, max_digits=8)
     creation_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """ TransactionRecord Django Metadata """
+
         ordering = ["creation_date"]
 
     @property
