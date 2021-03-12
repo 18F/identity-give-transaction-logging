@@ -11,10 +11,10 @@ def generate_random_transaction_data() -> dict:
     """ Helper to generate transaction data """
     return {
         "service_type": random.choice(list(ServiceType)),
-        "customer": "login.gov",
+        "provider": random.choice(["idemia", "usps"]),
         "csp": "login.gov",
         "cost": random.randrange(0, 200) / 100,
-        "result": "fail",
+        "result": random.choice(["fail", "pass"]),
     }
 
 
