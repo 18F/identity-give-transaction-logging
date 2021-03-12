@@ -27,7 +27,7 @@ class TransactionRecord(models.Model):
     # The CSP that sent the request. e.g. login.gov
     csp = models.CharField(max_length=60)
 
-    # The result of the transaction. Match/No-match
+    # The result of the transaction. e.g. match, no match, unknown
     result = models.CharField(max_length=60)
 
     # The unique identifier for this record. Services that need to look up
