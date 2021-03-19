@@ -22,10 +22,11 @@ class TransactionRecord(models.Model):
     )
 
     # The validation provider. e.g. USPS, Idemia
-    provider = models.CharField(max_length=60)
+    provider = models.CharField(max_length=16)
 
-    # The CSP that sent the request. e.g. login.gov
-    csp = models.CharField(max_length=60)
+    # The CSP that sent the request. e.g. login.gov. NOTE that this value is the value
+    # stored as the custom_id in the KONG gateway microservice.
+    csp = models.CharField(max_length=16)
 
     # The result of the transaction. True=Match, False=NoMatch, Null/None=Unknown/N/A
     result = models.BooleanField(null=True, blank=True, default=None)
