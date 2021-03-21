@@ -3,7 +3,7 @@ version: 1
 applications:
   - name: transaction-log
     routes:
-      - route: identity-give-transaction-log.apps.internal
+      - route: ((route))
     instances: ((instances))
     memory: ((memory))
     services:
