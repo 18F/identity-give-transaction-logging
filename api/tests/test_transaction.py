@@ -6,6 +6,8 @@ from django.test import TestCase
 from rest_framework import status
 from api.models import ServiceType
 
+TRANSACTION_LIST_URL = reverse("transactionrecord-list")
+
 
 def generate_random_transaction_data() -> dict:
     """ Helper to generate transaction data """
@@ -20,10 +22,11 @@ def generate_random_transaction_data() -> dict:
 
 def post_new_record(client, transaction_record=None):
     """ POST a new transaction record """
-    url = reverse("transactionrecord-list")
     if transaction_record is None:
         transaction_record = generate_random_transaction_data()
-    return client.post(url, transaction_record, content_type="application/json")
+    return client.post(
+        TRANSACTION_LIST_URL, transaction_record, content_type="application/json"
+    )
 
 
 class TransactionRecordCRUDTest(TestCase):
@@ -36,8 +39,9 @@ class TransactionRecordCRUDTest(TestCase):
 
     def test_create_transaction_fail(self):
         """ Test that bad request bodies are rejected """
-        url = reverse("transactionrecord-list")
-        response = self.client.post(url, None, content_type="application/json")
+        response = self.client.post(
+            TRANSACTION_LIST_URL, None, content_type="application/json"
+        )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_read_transaction_succeed(self):
@@ -122,7 +126,7 @@ class TransactionRecordCRUDTest(TestCase):
         self.assertEqual(patch_response.status_code, status.HTTP_200_OK)
 
     def test_result_default_value_empty_string(self):
-        """ Test that None/Null is the default value for 'result' """
+        """ Test that 'result' is 'None' when passed an empty string """
         record = generate_random_transaction_data()
         record["result"] = ""
         response = post_new_record(self.client, record)
@@ -131,6 +135,7 @@ class TransactionRecordCRUDTest(TestCase):
         self.assertIsNone(response.json()["result"])
 
     def test_result_default_value_when_explicit(self):
+        """ Test that the 'result' can explicitly be set to 'None' """
         record = generate_random_transaction_data()
         record["result"] = None
         response = post_new_record(self.client, record)
@@ -139,6 +144,7 @@ class TransactionRecordCRUDTest(TestCase):
         self.assertIsNone(response.json()["result"])
 
     def test_result_default_value_when_omitted(self):
+        """ Test that omitting the 'result' field results in 'None' for the result """
         record = generate_random_transaction_data()
         del record["result"]
         response = post_new_record(self.client, record)
@@ -147,12 +153,12 @@ class TransactionRecordCRUDTest(TestCase):
         self.assertIsNone(response.json()["result"])
 
     def test_no_create_record_with_wrong_mediatype(self):
+        """ Test that using the wrong content-type does not result in a created transaction """
         record = generate_random_transaction_data()
-        url = reverse("transactionrecord-list")
 
         # Explicitly try to use something other than "application/json"
         response = self.client.post(
-            url, data=record, content_type="multipart/form-data"
+            TRANSACTION_LIST_URL, data=record, content_type="multipart/form-data"
         )
 
         self.assertNotEqual(response.status_code, status.HTTP_201_CREATED)
