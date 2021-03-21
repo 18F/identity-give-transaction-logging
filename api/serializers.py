@@ -7,5 +7,7 @@ class TransactionRecordSerializer(serializers.ModelSerializer):
     """ Serializer for TransactionRecord objects """
 
     class Meta:
+        """ TransactionRecordSerializer Django Metadata """
+
         model = TransactionRecord
         fields = "__all__"
