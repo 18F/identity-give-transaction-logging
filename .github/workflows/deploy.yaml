@@ -1,0 +1,61 @@
+---
+# This workflow will install Python dependencies and run tests
+
+name: Deploy-Dev
+
+on:
+  workflow_run:
+    workflows: ["Unit-Tests"]
+    branches: [main]
+    types: [completed]
+    paths-ignore:
+      - '**.md'  # All markdown files in the repository
+
+jobs:
+  deploy:
+    if: github.repository_owner == '18F'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install CloudFoundry CLI
+        run: |
+          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v7&source=github" | sudo tar -zx --directory=/usr/local/bin
+          cf --version
+
+      - name: Setup CF CLI auth
+        run: |
+          cf api https://api.fr.cloud.gov
+          cf auth ${{ secrets.CF_USERNAME }} ${{ secrets.CF_PASSWORD }}
+
+      - name: Determine deployment target
+        id: deployment-target
+        env:
+          GITHUB_REF: ${{ github.ref }}
+        run: |
+          # Use the Github reference to determine environment values
+          if [[ $GITHUB_REF == "refs/heads/main" ]]; then
+              # Pushes to main are deployed to dev
+              target_environment=give-dev
+              service_route=identity-give-transaction-log-dev.apps.internal
+          elif [[ $GITHUB_REF =~ refs/tags/* ]]; then
+              # Tags on main are deployed to test
+              target_environment=give-test
+              service_route=identity-give-transaction-log-test.apps.internal
+          else
+              echo 'Unknown deployment target'
+              exit 1
+          fi
+
+          # Set the outputs for this step
+          echo "::set-output name=SPACE::$target_environment"
+          echo "::set-output name=ROUTE::$service_route"
+
+      - name: Set CF CLI Target
+        run: cf target -o ${{ secrets.CF_ORG }} -s ${{ steps.deployment-target.outputs.SPACE }}
+
+      - name: Ensure DB Available
+        run: .cloud-gov/ensure_db_available.sh transaction-log-db
+
+      - name: Deploy Application
+        run: cf push --vars-file vars.yaml --var SECRET_KEY=${{ secrets.SECRET_KEY }} --var route=${{ steps.deploymnet-target.outputs.ROUTE }} --strategy rolling

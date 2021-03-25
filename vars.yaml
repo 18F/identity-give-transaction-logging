@@ -1,4 +1,3 @@
 ---
 instances: 2
 memory: 128M
-route: identity-give-transaction-log-dev.apps.internal
