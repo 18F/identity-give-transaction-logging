@@ -59,4 +59,4 @@ jobs:
         run: .cloud-gov/ensure_db_available.sh transaction-log-db
 
       - name: Deploy Application
-        run: cf push --vars-file vars.yaml --var SECRET_KEY=${{ secrets.SECRET_KEY }} --var route=${{ steps.deploymnet-target.outputs.ROUTE }} --strategy rolling
+        run: cf push --vars-file vars.yaml --var SECRET_KEY=${{ secrets.SECRET_KEY }} --var route=${{ steps.deployment-target.outputs.ROUTE }} --strategy rolling
