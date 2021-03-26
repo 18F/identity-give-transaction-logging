@@ -16,7 +16,7 @@ find security issues very early on in the development process. See
 [CodeQL](https://securitylab.github.com/tools/codeql) for more details.
 
 ## Deploy
-Deploys the project to the GIVE correct environment within Cloud.gov. The
+Deploys the project to the correct GIVE environment within Cloud.gov. The
 deploy-dev workflow will only run if the unit-tests workflow completes
 successfully and will only be triggered in the 18F repository. This will
 prevent forks from needlessly running workflows that will always fail
