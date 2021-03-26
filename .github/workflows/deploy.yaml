@@ -1,7 +1,7 @@
 ---
-# This workflow will install Python dependencies and run tests
+# This workflow will deploy the application to a target environment
 
-name: Deploy-Dev
+name: Deploy
 
 on:
   workflow_run:
